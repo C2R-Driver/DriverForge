@@ -1,0 +1,62 @@
+{
+  "driver": "virtio-rng",
+  "omit": "kernel/core/comps/virtio/src/device/entropy",
+  "device_type": "Entropy",
+  "source_entries": [
+    "drivers/char/hw_random/virtio-rng.c",
+    "drivers/char/hw_random/core.c",
+    "include/linux/hw_random.h",
+    "include/linux/virtio.h",
+    "include/linux/virtio_config.h",
+    "include/linux/virtio_ring.h",
+    "include/uapi/linux/virtio_ring.h",
+    "include/uapi/linux/virtio_config.h"
+  ],
+  "tests": [
+    "test/initramfs/src/regression/device/hwrng.c"
+  ],
+  "benchmarks": [],
+  "qemu_model": "virtio-rng-pci",
+  "scope": "Translate Linux VirtIO RNG hardware behavior into the existing Asterinas entropy-device API. Preserve DMA ownership, refill/completion and blocking/nonblocking semantics required by the unchanged hwrng caller. Pass all original hwrng.c regression functions in the rebuilt full kernel with virtio-rng-pci; device-unavailable skips are not acceptance.",
+  "upstream_linux": "LOCAL_INPUT_REVISION",
+  "upstream_asterinas": "LOCAL_INPUT_REVISION",
+  "target_root_commit": "LOCAL_INPUT_REVISION",
+  "source_root_commit": "LOCAL_INPUT_REVISION",
+  "environment": {
+    "image_id": "sha256:LOCAL_INPUT_FINGERPRINT",
+    "image_tag": "asterinas/dev:0.18.1-20260901",
+    "source_revision": "LOCAL_INPUT_REVISION",
+    "target_revision": "LOCAL_INPUT_REVISION",
+    "qemu_evidence_revision": "LOCAL_INPUT_REVISION",
+    "accelerator": "kvm",
+    "cpus": 1,
+    "memory": "2G",
+    "firmware": "/root/ovmf/release/OVMF.fd",
+    "machine": "q35",
+    "sdk_sha256": "LOCAL_INPUT_FINGERPRINT",
+    "initramfs_sha256": "LOCAL_INPUT_FINGERPRINT",
+    "tools_log_sha256": "LOCAL_INPUT_FINGERPRINT",
+    "runner": {
+      "hollow.py": "LOCAL_INPUT_FINGERPRINT",
+      "run_benchmark.py": "LOCAL_INPUT_FINGERPRINT",
+      "package_tests.py": "LOCAL_INPUT_FINGERPRINT",
+      "prepare.py": "LOCAL_INPUT_FINGERPRINT",
+      "common.py": "LOCAL_INPUT_FINGERPRINT",
+      "check.py": "LOCAL_INPUT_FINGERPRINT"
+    },
+    "sdk_local_development": true,
+    "toolchain_mode": "direct pinned image binaries; no rustup copy",
+    "incremental": false,
+    "debug_info": false,
+    "runtime_identity": {
+      "container": "LOCAL_INPUT_FINGERPRINT",
+      "guest": "LOCAL_INPUT_FINGERPRINT",
+      "network_peer": "LOCAL_INPUT_FINGERPRINT",
+      "runtime": "LOCAL_INPUT_FINGERPRINT",
+      "oracle": "LOCAL_INPUT_FINGERPRINT"
+    },
+    "release_note": "Runtime identity frozen after successful controls and production adapter validation; earlier receipts retain their recorded preparation environment."
+  },
+  "source_tree": "LOCAL_INPUT_REVISION",
+  "source_scope": "complete-linux-tree"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "factory": "../../../driver-port-factory-main",
+  "workspace": "../../../experiments/team",
+  "repositories": {
+    "linux": "../../../experiments/team/repos/linux",
+    "asterinas": "../../../experiments/team/repos/asterinas",
+    "qemu": "../../../experiments/team/repos/qemu"
+  },
+  "suites": {
+    "native": "../../../experiments/team/native-suite",
+    "public": "../../../experiments/team/public-suite",
+    "intel": "../../../experiments/team/intel-suite"
+  },
+  "codex_bin": "../../.local/tools/bin/codex",
+  "base_url": "https://api.example.invalid/v1",
+  "api_key_env": "C2R_API_KEY",
+  "api_key_file": "../../.local/model.key",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "medium",
+  "pricing": "local-pricing.json",
+  "codex_version": "0.160.1"
+}

@@ -1,0 +1,52 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from .acquisition.cli import register_commands as register_acquisition_commands
+from .cli_support import command_registry
+from .codex.cli import register_commands as register_codex_commands
+from .control.cli import register_commands as register_control_commands
+from .core.models import WorkflowError
+from .environment.cli import register_commands as register_environment_commands
+from .intake.cli import register_commands as register_intake_commands
+from .knowledge.cli import register_commands as register_knowledge_commands
+from .port import register_commands as register_port_commands
+from .sealing.cli import register_commands as register_sealing_commands
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(prog="dpf", description="Driver Port Factory")
+    commands = command_registry(root, dest="command")
+    register_control_commands(commands)
+    register_port_commands(commands)
+    register_intake_commands(commands)
+    register_acquisition_commands(commands)
+    register_environment_commands(commands)
+    register_knowledge_commands(commands)
+    register_codex_commands(commands)
+    register_sealing_commands(commands)
+    from .migration.experiment_cli import register_commands as register_experiments
+    register_experiments(commands)
+    from .platform_assets import register_commands as register_platform_assets
+    register_platform_assets(commands)
+    from .build_cache import register_commands as register_build_cache
+    register_build_cache(commands)
+    from .checkpoints import register_commands as register_checkpoints
+    register_checkpoints(commands)
+    return root
+
+
+def main(argv: list[str] | None = None) -> int:
+    try:
+        arguments = parser().parse_args(argv)
+        arguments.handler(arguments)
+    except (WorkflowError, ValueError, OSError, json.JSONDecodeError) as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

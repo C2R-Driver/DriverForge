@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "evaluation_mode": "DEVELOPER_EVIDENCE",
+  "test_author_candidate_exposure": "Prior development context and public results were observed before these variants were designed.",
+  "producer_private_feedback": "NONE: frozen old candidates only; no repair or translation calls",
+  "candidate_freeze_relation": "Candidates predate additional parameter tests; not prospective blind evaluation",
+  "repetitions": 1,
+  "retry_policy": "No retry for candidate FAIL or TIMEOUT. Harness errors retained separately; any corrected execution has a separate attempt.",
+  "profiles": {
+    "A": {
+      "evbug": {"name_suffix": "-va", "key": "B", "key_code": 48, "relative_x": -19, "relative_y": 13, "minimum": -2147483600, "maximum": 2147483600},
+      "virtio-rng": {"readers": 3, "concurrent_bytes": 128, "prime_bytes": 3, "short_bytes": 33, "large_bytes": 8192, "smoke_bytes": 2048, "small_reads": [2, 5, 9]},
+      "virtio-blk": {"short_bytes": 37, "small_bytes": 17, "boundary_backoff": 7, "patch": ["Q", "R", "S"], "message": "parameter variant alpha", "partial_bytes": 137, "cross_bytes": 6144, "pattern_stride": 17, "pattern_fill": "K", "short_write_data": "alpha_937"},
+      "virtio-net": {"seconds": 3, "tcp_bytes": 768, "udp_bytes": 257, "udp_rate": "20M"},
+      "ne2k-pci": {"mac": "52:54:00:12:34:71", "peer_mac": "52:54:00:ab:cd:71", "lengths": [60, 63, 129, 258, 777, 1490], "traffic_count": 48, "pattern_stride": 29, "response_xor": 60},
+      "nvme-pci": {"buffer_bytes": 8192, "random_seed": 37, "file": "/nvme/nvme_variant_a"}
+    },
+    "B": {
+      "evbug": {"name_suffix": "-vb", "key": "C", "key_code": 46, "relative_x": -257, "relative_y": 127, "minimum": -123456789, "maximum": 987654321},
+      "virtio-rng": {"readers": 5, "concurrent_bytes": 384, "prime_bytes": 7, "short_bytes": 97, "large_bytes": 12288, "smoke_bytes": 8192, "small_reads": [4, 11, 15]},
+      "virtio-blk": {"short_bytes": 93, "small_bytes": 29, "boundary_backoff": 11, "patch": ["m", "n", "p"], "message": "beta data 0123456789", "partial_bytes": 255, "cross_bytes": 12288, "pattern_stride": 31, "pattern_fill": "Z", "short_write_data": "beta_419"},
+      "virtio-net": {"seconds": 4, "tcp_bytes": 1024, "udp_bytes": 1021, "udp_rate": "30M"},
+      "ne2k-pci": {"mac": "52:54:00:12:34:72", "peer_mac": "52:54:00:ab:cd:72", "lengths": [62, 65, 255, 510, 1023, 1500], "traffic_count": 72, "pattern_stride": 31, "response_xor": 90},
+      "nvme-pci": {"buffer_bytes": 32768, "random_seed": 93, "file": "/nvme/nvme_variant_b"}
+    }
+  }
+}

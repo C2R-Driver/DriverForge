@@ -1,0 +1,7 @@
+驱动,Basic子测试,A子测试,B子测试,Scenario子测试,Enhanced子测试
+evbug,3,3,3,0,6
+virtio-rng,15,15,15,4,34
+virtio-blk,8,8,8,5,21
+nvme-pci,1,1,1,3,5
+virtio-net,3,3,3,3,9
+ne2k-pci,3,3,3,2,8

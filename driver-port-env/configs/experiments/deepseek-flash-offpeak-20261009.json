@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "label": "Official DeepSeek off-peak CNY list prices, uniformly normalized; not an all-hours invoice",
+  "date": "2026-10-09",
+  "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+  "currency": "CNY",
+  "unit": "CNY per million tokens",
+  "per_request_accounting": true,
+  "cache_write_usage_required": false,
+  "cache_semantics": "No separate cache creation charge; cache misses priced as ordinary input.",
+  "off_peak_rule": "Beijing time: outside weekdays 09:00-12:00 and 14:00-18:00; statutory holidays and weekends all day.",
+  "models": {
+    "deepseek-flash": {
+      "input": 1,
+      "cached_input": 0.02,
+      "cache_write": 1,
+      "output": 4
+    }
+  },
+  "evidence_sha256": {
+    "pricing.html": "LOCAL_INPUT_FINGERPRINT"
+  },
+  "reasoning_effort_mapping": {
+    "requested": "medium",
+    "effective": "high",
+    "source": "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
+  }
+}

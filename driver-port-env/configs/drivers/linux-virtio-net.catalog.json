@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "catalog_id": "linux-virtio-net-native-suite",
+  "catalog_version": 1,
+  "source_platform": "linux",
+  "drivers": [
+    {
+      "canonical_name": "virtio-net",
+      "device_family": "virtio-net",
+      "bus_or_transport": "PCI",
+      "aliases": [],
+      "device_scope": [
+        "Translate Linux VirtIO Network into the retained target network API. Provide initialization, MAC, bounded RX/TX buffer ownership, completion/recycling, and interrupt progress for the pinned upstream feature profile. Complete all three unmodified upstream host/guest iperf3 scripts with actual nonzero sender/receiver traffic."
+      ],
+      "candidate_device_ids": [],
+      "qemu_models": [
+        "virtio-net-pci"
+      ],
+      "evidence_hints": [
+        "Pinned Linux LOCAL_INPUT_REVISION",
+        "Pinned Asterinas LOCAL_INPUT_REVISION",
+        "Public oracle: unchanged upstream tests. No physical hardware, exhaustive failure or performance claim.",
+        "Metadata provenance: configs/experiments/native-drivers.json; upstream Linux source and Asterinas tools/qemu_args.sh."
+      ],
+      "candidate_id": "linux-virtio-net",
+      "source_entry_hint": "drivers/net/virtio_net.c"
+    }
+  ]
+}

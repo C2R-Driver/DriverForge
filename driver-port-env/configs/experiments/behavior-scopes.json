@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "drivers": {
+    "virtio-rng": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Initialize the frozen VirtIO entropy device and publish it through the retained Asterinas entropy-device API.",
+        "Preserve source refill, completion, blocking/nonblocking read, buffer ownership and progress semantics at that caller boundary.",
+        "Handle failed initialization, unavailable data, errors and teardown without stale callbacks or premature DMA release. Preserve necessary synchronization and cleanup for these paths."
+      ],
+      "excluded": [
+        "Recreating Linux hwrng framework policy, sysfs controls or unrelated entropy consumers.",
+        "Adding device variants, power-management or dynamic hotplug facilities outside the frozen device and target caller boundary."
+      ]
+    },
+    "virtio-blk": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Initialize the frozen VirtIO block device, validate its capacity and supported features, and publish it through the retained Asterinas block-device API.",
+        "Preserve source read/write and applicable flush semantics, request bounds, completion status, DMA ownership, ordering and interrupt/polling progress.",
+        "Handle failed acquisition, device errors and queue/device teardown with terminal request completion and correct resource lifetime. Support data variation throughout the declared operations, rather than only test inputs."
+      ],
+      "excluded": [
+        "Linux-specific block ioctls, sysfs and blk-mq policy not required by the retained target caller interface.",
+        "New discard, secure erase, zoned, integrity or control operations outside the declared target API; features absent from the frozen device profile.",
+        "Adding platform-wide hotplug or power-management subsystems."
+      ]
+    },
+    "virtio-net": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Initialize the frozen VirtIO network device, negotiate its applicable features, obtain the MAC and register with the retained Asterinas network API.",
+        "Preserve source packet RX/TX semantics, header and length validation, buffer/DMA ownership, descriptor completion and recycling, synchronization and interrupt/progress behavior for the frozen feature profile.",
+        "Handle unavailable buffers, malformed completions, device errors, failed initialization and stop/teardown without leaks, stale callbacks or premature DMA release. Carry real traffic through the existing network stack across valid packet and workload variations."
+      ],
+      "excluded": [
+        "Recreating Linux netdev, ethtool, sysfs, XDP or administrative control surfaces absent from the declared target network interface.",
+        "Adding offload, multiqueue, RSS or control-queue operations outside the frozen negotiated feature profile and required target caller boundary.",
+        "Adding platform-wide dynamic hotplug or power-management facilities, or implementing a replacement TCP/IP stack."
+      ]
+    },
+    "nvme-pci": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Bind the frozen PCI NVMe controller, acquire BAR/bus-master resources, perform bounded controller initialization and readiness transitions, and create the admin and I/O queues needed for the retained target block API.",
+        "Identify usable namespaces and their capacity/LBA geometry, publish them through the retained block-device and partition paths, and implement source-aligned read/write and applicable flush behavior with valid PRP/data descriptors, request bounds, completion phase/status and progress.",
+        "Preserve ownership, synchronization and DMA lifetime for those paths. Handle initialization failures, unavailable namespaces, command errors, timeouts and reset/teardown of owned resources with bounded completion or cancellation. Support valid data/transfer variations beyond the public examples."
+      ],
+      "excluded": [
+        "Linux controller/namespace ioctl passthrough, controller character devices, sysfs administration and user-triggered format/reset/rescan interfaces.",
+        "New discard, write-zeroes, zoned, metadata/protection or integrity operations outside the retained target block API; multiple-controller and physical-device quirk coverage outside the frozen device profile.",
+        "Adding platform-wide PCI hotplug, asynchronous namespace-change monitoring or power-management facilities. Necessary cleanup and internal recovery of the required data path remain in scope."
+      ]
+    },
+    "evbug": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Register a source-aligned evbug input handler with the real retained Asterinas input subsystem, connecting existing and future devices at that handler boundary.",
+        "Preserve source event diagnostics for accepted event types/codes/values, connection/disconnection, event ordering and handler lifetime; do not restrict valid input to public examples.",
+        "Handle registration/allocation failures and concurrent event/disconnect/handler removal with appropriate ownership, synchronization and cleanup."
+      ],
+      "excluded": [
+        "Implementing physical input hardware drivers or their IRQ paths, or rebuilding the Linux input subsystem and its administrative interfaces.",
+        "Adding platform-wide power-management or hotplug infrastructure beyond the required input-handler connect/disconnect boundary."
+      ]
+    },
+    "ne2k-pci": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Bind the frozen PCI RTL8029/NE2000 device, acquire its I/O and IRQ resources, read the PROM MAC, initialize the shared 8390 hardware path and register through the retained target network API.",
+        "Preserve source PIO/remote-DMA TX and receive-ring semantics, frame length/header/boundary validation, completion/recycling, interrupt synchronization and progress. Use the real device and peer across valid frame variations.",
+        "Preserve source stop/start and applicable timeout/overrun recovery for that device. Handle failed probe, errors and teardown with correct buffer ownership, interrupt quiescence and resource lifetime. The operator-owned proc/test adapter may invoke these real operations without changing assertions."
+      ],
+      "excluded": [
+        "ISA/PCMCIA variants, physical clone quirks and devices outside the frozen PCI identity/profile.",
+        "Recreating Linux netdev/ethtool/sysfs administrative interfaces or adding platform-wide dynamic PCI hotplug and power management.",
+        "Implementing a replacement TCP/IP stack or independent functions outside the retained frame-level network interface."
+      ]
+    },
+    "igb": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Real aster_network device and eth0 protocol stack; no virtual/fake receive path. Fixed proc adapter only dispatches immutable fixture commands.",
+        "Linux v6.12 igb for QEMU 82576 (8086:10c9), real PCI/MSI-X/DMA Ethernet integration, normal MTU RX/TX, bounded ownership, completion/recycling and restart. One and two combined queues; IPv4 UDP RSS, key/RETA and real progress on both hardware queues.",
+        "Preserve Linux semantics within the frozen chip/capability scope; inspect complete source context, not only entry file.",
+        "Use OSTD safe MMIO/DMA and MSI-X callbacks; init/cleanup/error handling belongs to its capability."
+      ],
+      "excluded": [
+        "Other Intel models, jumbo frames, offloads, SR-IOV/VFs, PTP, power management, hotplug and ethtool ABI.",
+        "Physical hardware validation and complete Linux diagnostic suite.",
+        "Modifying public test assertions or inventing test success markers."
+      ]
+    },
+    "e1000e": {
+      "mode": "explicit-subset",
+      "integration": "target-kernel",
+      "required": [
+        "Real aster_network device and eth0 protocol stack; no virtual/fake receive path. Fixed proc adapter only dispatches immutable fixture commands.",
+        "Linux v6.12 e1000e for QEMU 82574L (8086:10d3), real PCI/MSI-X/DMA Ethernet integration, normal MTU RX/TX, bounded ownership, completion/recycling and restart. Offline register/NVM/link diagnostics with saved register restoration and normal traffic after restart; exclude the legacy interrupt selftest.",
+        "Preserve Linux semantics within the frozen chip/capability scope; inspect complete source context, not only entry file.",
+        "Use OSTD safe MMIO/DMA and MSI-X callbacks; init/cleanup/error handling belongs to its capability."
+      ],
+      "excluded": [
+        "Other Intel models, jumbo frames, offloads, SR-IOV/VFs, PTP, power management, hotplug and ethtool ABI.",
+        "Physical hardware validation and complete Linux diagnostic suite.",
+        "Modifying public test assertions or inventing test success markers."
+      ]
+    }
+  }
+}

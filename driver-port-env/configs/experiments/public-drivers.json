@@ -1,0 +1,55 @@
+{
+  "drivers": {
+    "evbug": {
+      "omit": "kernel/core/comps/input/src/evbug.rs",
+      "source_entries": [
+        "drivers/input/evbug.c",
+        "drivers/input/input.c",
+        "include/linux/input.h"
+      ],
+      "tests": [
+        "evbug-events",
+        "evbug-lifecycle",
+        "evbug-boundaries"
+      ],
+      "benchmarks": [],
+      "qemu_model": "software input handler; no dedicated QEMU device",
+      "scope": "Linux evbug input-handler behavior and real Asterinas input integration: registration, existing and future device connections, event diagnostics, disconnect and handler lifetime. Preserve source obligations even outside the public SYN/KEY/REL scenarios. Physical input IRQ, full event families, allocation failures and concurrency are not fully covered by the fixed public suite.",
+      "suite_kind": "fixed-public-fixture",
+      "target_baseline": "original upstream target without this driver; no previously translated Rust candidate",
+      "fixture_file": "kernel/core/comps/input/src/dpf_evbug_public.rs",
+      "fixture_asset": "evbug_public.rs",
+      "boot_case": "evbug-baseline-boot",
+      "runtime_script": "public_runtime.py",
+      "case_unit": "fixed public fixture scenario"
+    },
+    "ne2k-pci": {
+      "omit": "kernel/core/comps/network/src/ne2k.rs",
+      "source_entries": [
+        "drivers/net/ethernet/8390/ne2k-pci.c",
+        "drivers/net/ethernet/8390/8390.c",
+        "drivers/net/ethernet/8390/lib8390.c",
+        "drivers/net/ethernet/8390/8390.h"
+      ],
+      "tests": [
+        "ne2k-probe",
+        "ne2k-traffic",
+        "ne2k-recovery"
+      ],
+      "benchmarks": [],
+      "qemu_model": "ne2k_pci,netdev=dpf-peer,mac=52:54:00:12:34:56,addr=5",
+      "scope": "Linux PCI NE2000 / QEMU RTL8029 (10ec:8029) and shared 8390 behavior: real PCI registration, PROM MAC, PIO buffer ownership, interrupt progress, transmit/receive, stop/start and recovery. Preserve source obligations, not only the fixed wire exchanges. ISA/PCMCIA, physical clones, dynamic hotplug, complete TCP/IP and exhaustive fault/concurrency coverage are excluded from public validation claims.",
+      "suite_kind": "fixed-public-fixture",
+      "target_baseline": "original upstream target without this driver; no previously translated Rust candidate",
+      "fixture_file": "kernel/core/comps/network/src/dpf_ne2k_public.rs",
+      "fixture_asset": "ne2k_public.rs",
+      "boot_case": "ne2k-pci-baseline-boot",
+      "runtime_script": "public_runtime.py",
+      "case_unit": "fixed public fixture scenario"
+    }
+  },
+  "suite_kind": "fixed-public-fixture",
+  "control_status": "NOT_RUN_FOR_THIS_ENVIRONMENT_COMBINATION",
+  "kernel_log_level": "info",
+  "runtime_profile": "common-runtime.json"
+}

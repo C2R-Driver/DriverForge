@@ -1,0 +1,210 @@
+from enum import StrEnum
+
+
+class MigrationStage(StrEnum):
+    HANDOFF = "migration_handoff"
+    CONTRACTS = "migration_contracts"
+    ANALYSIS_REVIEW = "analysis_review"
+    TARGET_FRAMEWORK_ENABLEMENT = "target_framework_enablement"
+    DRIVER_IMPLEMENTATION = "driver_implementation"
+    ARTIFACT_PREPARATION = "artifact_preparation"
+    PUBLIC_QEMU_VALIDATION = "public_qemu_validation"
+    FINAL_EVIDENCE_REVIEW = "final_evidence_review"
+    COMPLETION_AUDIT = "completion_audit"
+    BENCHMARK_VALIDATION = "benchmark_validation"
+
+
+class MigrationArtifact(StrEnum):
+    HANDOFF = "migration_handoff"
+    CONTRACTS = "migration_contracts"
+    TEST_PORT_MATRIX = "test_port_matrix"
+    ANALYSIS_REVIEW_REPORT = "analysis_review_report"
+    TARGET_FRAMEWORK_BUNDLE = "target_framework_enablement_bundle"
+    TARGET_FRAMEWORK_REPORT = "target_framework_enablement_report"
+    TARGET_FRAMEWORK_CHANGE_INVENTORY = "target_framework_change_inventory"
+    IMPLEMENTATION_BUNDLE = "driver_implementation_bundle"
+    TARGET_CHANGE_INVENTORY = "target_change_inventory"
+    COMPLIANCE_REPORT = "compliance_report"
+    ARTIFACT_PREPARATION_ATTEMPT = "artifact_preparation_attempt"
+    RUNTIME_ARTIFACT = "runtime_artifact"
+    RUNTIME_VARIANT = "runtime_variant"
+    ARTIFACT_IDENTITY = "artifact_identity"
+    PUBLIC_QEMU_ATTEMPT = "public_qemu_attempt"
+    PUBLIC_QEMU_REPORT = "public_qemu_report"
+    PUBLIC_QEMU_WORK_REPORT = "public_qemu_work_report"
+    FINAL_EVIDENCE_REVIEW_REPORT = "final_evidence_review_report"
+    EVIDENCE_AUDIT = "evidence_audit"
+    BENCHMARK_REPORT = "benchmark_report"
+    BENCHMARK_ATTEMPT = "benchmark_attempt"
+
+
+class HandoffMode(StrEnum):
+    DEVELOPER = "DEVELOPER"
+    BLIND_CANDIDATE = "BLIND_CANDIDATE"
+
+
+class ContractEvidenceStatus(StrEnum):
+    VERIFIED = "VERIFIED"
+    INFERRED = "INFERRED"
+    UNKNOWN = "UNKNOWN"
+
+
+class ContractExecutionStatus(StrEnum):
+    NOT_RUN = "NOT_RUN"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+    BLOCKED = "BLOCKED"
+    FAIL = "FAIL"
+    PASS = "PASS"
+
+
+class ContractVerificationKind(StrEnum):
+    STATIC = "STATIC"
+    QEMU = "QEMU"
+
+
+class EvidenceSuccessor(StrEnum):
+    KNOWLEDGE = "knowledge"
+    ACQUISITION = "acquisition"
+
+
+class TestPrimaryClass(StrEnum):
+    DEVICE_FUNCTIONAL = "DEVICE_FUNCTIONAL"
+    DEVICE_PROTOCOL_INTERNAL = "DEVICE_PROTOCOL_INTERNAL"
+    PORTABLE_INTENT_PLATFORM_HARNESS = "PORTABLE_INTENT_PLATFORM_HARNESS"
+    SOURCE_PLATFORM_SEMANTICS = "SOURCE_PLATFORM_SEMANTICS"
+    OUT_OF_SCOPE_DEVICE_VARIANT = "OUT_OF_SCOPE_DEVICE_VARIANT"
+    TARGET_CAPABILITY_BLOCKED = "TARGET_CAPABILITY_BLOCKED"
+    QEMU_MODEL_BLOCKED = "QEMU_MODEL_BLOCKED"
+
+
+class TestDisposition(StrEnum):
+    RETAIN = "RETAIN"
+    ADAPT = "ADAPT"
+    EXCLUDE = "EXCLUDE"
+    PRESERVE_BLOCKED = "PRESERVE_BLOCKED"
+
+
+class TestOrigin(StrEnum):
+    SOURCE_TEST = "SOURCE_TEST"
+    NEW_MIGRATION_TEST = "NEW_MIGRATION_TEST"
+
+
+class ImplementationFileRole(StrEnum):
+    DRIVER = "DRIVER"
+    PUBLIC_TEST = "PUBLIC_TEST"
+    INTEGRATION = "INTEGRATION"
+
+
+class TranslationDomain(StrEnum):
+    FUNCTION_CALLBACK = "FUNCTION_CALLBACK"
+    TYPE_LAYOUT = "TYPE_LAYOUT"
+    GLOBAL_STATE = "GLOBAL_STATE"
+    HARDWARE_EFFECT = "HARDWARE_EFFECT"
+    LIFECYCLE_ERROR = "LIFECYCLE_ERROR"
+    TEST_ASSERTION = "TEST_ASSERTION"
+
+
+class TranslationStatus(StrEnum):
+    TRANSLATED = "TRANSLATED"
+    PARTIAL = "PARTIAL"
+    BLOCKED = "BLOCKED"
+    UNMAPPED = "UNMAPPED"
+    UNSAFE_REQUIRED = "UNSAFE_REQUIRED"
+
+
+class SourceFactKind(StrEnum):
+    FUNCTION_DEFINITION = "FUNCTION_DEFINITION"
+    RECORD_DEFINITION = "RECORD_DEFINITION"
+    GLOBAL = "GLOBAL"
+    EFFECT = "EFFECT"
+    CALL = "CALL"
+    CONTROL_FLOW = "CONTROL_FLOW"
+
+
+class TargetChangeStatus(StrEnum):
+    PLANNED = "TARGET_CHANGE_PLANNED"
+    VERIFIED = "TARGET_CHANGE_VERIFIED"
+    BLOCKED = "BLOCKED_TARGET_CHANGE"
+
+
+class ComplianceArea(StrEnum):
+    FORMATTING_NAMING = "FORMATTING_NAMING"
+    API_USAGE = "API_USAGE"
+    ARCHITECTURE_LAYERING = "ARCHITECTURE_LAYERING"
+    FEATURE_MANIFEST = "FEATURE_MANIFEST"
+    SAFE_UNSAFE = "SAFE_UNSAFE"
+    LOCK_IRQ_ORDERING_ALLOCATION = "LOCK_IRQ_ORDERING_ALLOCATION"
+    ERROR_SEMANTICS = "ERROR_SEMANTICS"
+    LIFECYCLE_CLEANUP = "LIFECYCLE_CLEANUP"
+    COMPATIBILITY = "COMPATIBILITY"
+    LOGGING_OBSERVABILITY = "LOGGING_OBSERVABILITY"
+    DOCUMENTATION = "DOCUMENTATION"
+
+
+class ComplianceStatus(StrEnum):
+    PASS = "PASS"
+    VIOLATION = "VIOLATION"
+    UNKNOWN = "UNKNOWN"
+
+
+class ComplianceRepairTarget(StrEnum):
+    NONE = "NONE"
+    IMPLEMENTATION = "IMPLEMENTATION"
+    KNOWLEDGE = "KNOWLEDGE"
+
+
+class EvidenceLadderLevel(StrEnum):
+    ENVIRONMENT_SMOKE = "ENVIRONMENT_SMOKE"
+    STATIC_STYLE = "STATIC_STYLE"
+    ARTIFACT_PREPARATION = "ARTIFACT_PREPARATION"
+    DRIVER_PRESENCE = "DRIVER_PRESENCE"
+    ENUMERATION_PROBE = "ENUMERATION_PROBE"
+    DATA_OPERATION = "DATA_OPERATION"
+    INTERRUPT_DEFERRED = "INTERRUPT_DEFERRED"
+    RETAINED_TESTS = "RETAINED_TESTS"
+    BOUNDARIES_RECOVERY = "BOUNDARIES_RECOVERY"
+    REGRESSION = "REGRESSION"
+
+
+class LadderDisposition(StrEnum):
+    EXECUTE = "EXECUTE"
+    FROZEN_PREREQUISITE = "FROZEN_PREREQUISITE"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+    BLOCKED = "BLOCKED"
+
+
+class MigrationBoundary(StrEnum):
+    BLOCKED_FULL_INTEGRATION = "BLOCKED_FULL_INTEGRATION"
+
+
+class PublicRunAttribution(StrEnum):
+    TARGET_DRIVER_ON_QEMU = "TARGET_DRIVER_ON_QEMU"
+    PUBLIC_HARNESS = "PUBLIC_HARNESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    INCONCLUSIVE = "INCONCLUSIVE"
+
+
+class RepairAttribution(StrEnum):
+    DRIVER_TRANSLATION = "DRIVER_TRANSLATION"
+    ADAPTED_TEST = "ADAPTED_TEST"
+    HARNESS_PACKAGING = "HARNESS_PACKAGING"
+    SOURCE_ASSUMPTION = "SOURCE_ASSUMPTION"
+    TARGET_API_PLATFORM = "TARGET_API_PLATFORM"
+    QEMU_MODEL = "QEMU_MODEL"
+    ENVIRONMENT_TOOLING = "ENVIRONMENT_TOOLING"
+    INCONCLUSIVE = "INCONCLUSIVE"
+
+    @property
+    def writable(self) -> bool:
+        return self in {
+            self.DRIVER_TRANSLATION,
+            self.ADAPTED_TEST,
+            self.HARNESS_PACKAGING,
+            self.SOURCE_ASSUMPTION,
+            self.TARGET_API_PLATFORM,
+        }
+
+
+class RepairAction(StrEnum):
+    APPLY = "APPLY"
+    BLOCKED = "BLOCKED"

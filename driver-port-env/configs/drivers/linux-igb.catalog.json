@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "catalog_id": "linux-igb-intel",
+  "catalog_version": 1,
+  "source_platform": "linux",
+  "drivers": [
+    {
+      "candidate_id": "linux-igb",
+      "canonical_name": "igb",
+      "source_entry_hint": "drivers/net/ethernet/intel/igb/igb_main.c",
+      "device_family": "Intel 82576 Ethernet",
+      "bus_or_transport": "PCIe",
+      "aliases": [
+        "IGB",
+        "82576"
+      ],
+      "device_scope": [
+        "QEMU 82576 only"
+      ],
+      "candidate_device_ids": [
+        "8086:10c9"
+      ],
+      "qemu_models": [
+        "igb"
+      ],
+      "evidence_hints": [
+        "Complete Linux v6.12 context, including shared hardware/PHY/NVM implementations",
+        "Frozen per-task scope and test interface, original Asterinas framework retained"
+      ]
+    }
+  ]
+}

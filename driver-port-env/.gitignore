@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+/experiments/
+/data/
+/runs/
+*.iso
+*.img
+*.cpio*
+*.vhdx
+.env
+auth.json
+.local/

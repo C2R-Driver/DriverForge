@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+.dpf/
+
+# Local experiment inputs, build outputs and credentials are not collaboration assets.
+runs/
+.local/
+.env
+auth.json
+*.vhdx
+
+# Windows download metadata
+*:Zone.Identifier

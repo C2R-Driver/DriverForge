@@ -1,0 +1,286 @@
+[
+  {
+    "id": "igb-probe",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "printf '%s\\n' 'probe' > /proc/igb_test"
+        },
+        {
+          "wait_serial": "DPF_INTEL_OK igb probe"
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "fixture": {
+          "guest_assert": "printf '%s\n' 'probe' > /proc/igb_test",
+          "wait_serial": "DPF_INTEL_OK igb probe"
+        }
+      }
+    }
+  },
+  {
+    "id": "igb-recovery",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "printf '%s\\n' 'recovery' > /proc/igb_test"
+        },
+        {
+          "wait_serial": "DPF_INTEL_OK igb recovery"
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "fixture": {
+          "guest_assert": "printf '%s\n' 'recovery' > /proc/igb_test",
+          "wait_serial": "DPF_INTEL_OK igb recovery"
+        },
+        "traffic": {
+          "case": "iperf3/tcp_virtio_bw",
+          "guest_assert": "ip link show eth0",
+          "guest_command": "/benchmark/common/bench_runner.sh iperf3/tcp_virtio_bw asterinas",
+          "wait_serial": "The VM is ready for the benchmark.",
+          "settle_seconds": 1,
+          "host_command": "iperf3 -c $GUEST_SERVER_IP_ADDRESS -f m",
+          "host_environment": {
+            "GUEST_SERVER_IP_ADDRESS": "10.0.2.15"
+          },
+          "host_timeout_seconds": 55,
+          "pass": {
+            "host_exit_code": 0,
+            "positive_mbits_roles": [
+              "receiver",
+              "sender"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "igb-rss",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "printf '%s\\n' 'queues2' > /proc/igb_test"
+        },
+        {
+          "wait_serial": "DPF_INTEL_OK igb queues2"
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "fixture": {
+          "guest_assert": "printf 'queues2\n' > /proc/igb_test"
+        },
+        "traffic": {
+          "case": "iperf3/udp_virtio_bw_rx",
+          "guest_assert": "ip link show eth0",
+          "guest_command": "/benchmark/common/bench_runner.sh iperf3/udp_virtio_bw_rx asterinas",
+          "wait_serial": "The VM is ready for the benchmark.",
+          "settle_seconds": 1,
+          "host_command": "iperf3 -u -b 2M -l 512 -c $GUEST_SERVER_IP_ADDRESS -f m -P 8",
+          "host_environment": {
+            "GUEST_SERVER_IP_ADDRESS": "10.0.2.15"
+          },
+          "host_timeout_seconds": 55,
+          "pass": {
+            "host_exit_code": 0,
+            "positive_mbits_roles": [
+              "receiver",
+              "sender"
+            ]
+          }
+        },
+        "qemu_trace": {
+          "args": [
+            "-trace",
+            "enable=e1000e_rx_written_to_guest",
+            "-trace",
+            "enable=igb_rx_metadata_rss"
+          ],
+          "require_rx_queues": [
+            0,
+            1
+          ],
+          "require_text": "igb_rx_metadata_rss"
+        }
+      }
+    }
+  },
+  {
+    "id": "iperf3/tcp_virtio_bw",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "ip link show eth0"
+        },
+        {
+          "send_serial": "/benchmark/common/bench_runner.sh iperf3/tcp_virtio_bw asterinas\n"
+        },
+        {
+          "wait_serial": "The VM is ready for the benchmark."
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "traffic": {
+          "case": "iperf3/tcp_virtio_bw",
+          "guest_assert": "ip link show eth0",
+          "guest_command": "/benchmark/common/bench_runner.sh iperf3/tcp_virtio_bw asterinas",
+          "wait_serial": "The VM is ready for the benchmark.",
+          "settle_seconds": 1,
+          "host_command": "iperf3 -c $GUEST_SERVER_IP_ADDRESS -f m",
+          "host_environment": {
+            "GUEST_SERVER_IP_ADDRESS": "10.0.2.15"
+          },
+          "host_timeout_seconds": 55,
+          "pass": {
+            "host_exit_code": 0,
+            "positive_mbits_roles": [
+              "receiver",
+              "sender"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "iperf3/udp_virtio_bw_rx",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "ip link show eth0"
+        },
+        {
+          "send_serial": "/benchmark/common/bench_runner.sh iperf3/udp_virtio_bw_rx asterinas\n"
+        },
+        {
+          "wait_serial": "The VM is ready for the benchmark."
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "traffic": {
+          "case": "iperf3/udp_virtio_bw_rx",
+          "guest_assert": "ip link show eth0",
+          "guest_command": "/benchmark/common/bench_runner.sh iperf3/udp_virtio_bw_rx asterinas",
+          "wait_serial": "The VM is ready for the benchmark.",
+          "settle_seconds": 1,
+          "host_command": "iperf3 -u -b 0 -l 1460 -c $GUEST_SERVER_IP_ADDRESS -f m",
+          "host_environment": {
+            "GUEST_SERVER_IP_ADDRESS": "10.0.2.15"
+          },
+          "host_timeout_seconds": 55,
+          "pass": {
+            "host_exit_code": 0,
+            "positive_mbits_roles": [
+              "receiver",
+              "sender"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "iperf3/udp_virtio_bw_tx",
+    "case": {
+      "timeout_seconds": 180,
+      "steps": [
+        {
+          "wait_serial": "# "
+        },
+        {
+          "guest_assert": "ip link show eth0"
+        },
+        {
+          "send_serial": "/benchmark/common/bench_runner.sh iperf3/udp_virtio_bw_tx asterinas\n"
+        },
+        {
+          "wait_serial": "The VM is ready for the benchmark."
+        }
+      ],
+      "acceptance": {
+        "version": 2,
+        "artifact": "same-final-iso",
+        "guest_boot": {
+          "wait_serial": "# ",
+          "guest_assert": "sh /test/boot_hello.sh",
+          "timeout_seconds": 180
+        },
+        "traffic": {
+          "case": "iperf3/udp_virtio_bw_tx",
+          "guest_assert": "ip link show eth0",
+          "guest_command": "/benchmark/common/bench_runner.sh iperf3/udp_virtio_bw_tx asterinas",
+          "wait_serial": "The VM is ready for the benchmark.",
+          "settle_seconds": 1,
+          "host_command": "iperf3 -R -u -b 0 -l 1460 -c $GUEST_SERVER_IP_ADDRESS -f m",
+          "host_environment": {
+            "GUEST_SERVER_IP_ADDRESS": "10.0.2.15"
+          },
+          "host_timeout_seconds": 55,
+          "pass": {
+            "host_exit_code": 0,
+            "positive_mbits_roles": [
+              "receiver",
+              "sender"
+            ]
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "driver-port-factory"
+version = "0.1.0"
+description = "Evidence-driven C-to-Rust driver migration workflow engine"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Anonymous Authors" }]
+dependencies = []
+
+[project.optional-dependencies]
+codex = ["openai-codex"]
+rag = ["sentence-transformers>=3,<6"]
+dev = ["jsonschema>=4.23", "pytest>=8", "referencing>=0.37", "ruff>=0.6"]
+
+[project.scripts]
+dpf = "driver_port_factory.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+driver_port_factory = [
+  "data/*.json",
+  "data/*.md",
+  "data/prompt-packs/*/*.json",
+  "data/prompt-packs/*/*.md",
+  "data/schemas/acquisition/*.json",
+  "data/public-tests/*/*.json",
+  "data/public-tests/*/*.md",
+  "data/public-tests/*/*.rs",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = ["C901", "E501", "PLR0912", "PLR0915"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.pylint]
+max-branches = 12
+max-statements = 60

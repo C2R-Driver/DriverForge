@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "catalog_id": "linux-e1000e-intel",
+  "catalog_version": 1,
+  "source_platform": "linux",
+  "drivers": [
+    {
+      "candidate_id": "linux-e1000e",
+      "canonical_name": "e1000e",
+      "source_entry_hint": "drivers/net/ethernet/intel/e1000e/netdev.c",
+      "device_family": "Intel 82574L Ethernet",
+      "bus_or_transport": "PCIe",
+      "aliases": [
+        "E1000E",
+        "82574L"
+      ],
+      "device_scope": [
+        "QEMU 82574L only"
+      ],
+      "candidate_device_ids": [
+        "8086:10d3"
+      ],
+      "qemu_models": [
+        "e1000e"
+      ],
+      "evidence_hints": [
+        "Complete Linux v6.12 context, including shared hardware/PHY/NVM implementations",
+        "Frozen per-task scope and test interface, original Asterinas framework retained"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+驱动,C实现文件,物理行数
+evbug,drivers/input/evbug.c,100
+virtio-rng,drivers/char/hw_random/virtio-rng.c,281
+virtio-rng,drivers/char/hw_random/core.c,804
+virtio-blk,drivers/block/virtio_blk.c,1732
+nvme-pci,drivers/nvme/host/pci.c,4348
+nvme-pci,drivers/nvme/host/core.c,5587
+nvme-pci,drivers/nvme/host/ioctl.c,911
+nvme-pci,drivers/nvme/host/sysfs.c,1312
+nvme-pci,drivers/nvme/host/pr.c,344
+virtio-net,drivers/net/virtio_net.c,7321
+ne2k-pci,drivers/net/ethernet/8390/ne2k-pci.c,723
+ne2k-pci,drivers/net/ethernet/8390/8390.c,104
+ne2k-pci,drivers/net/ethernet/8390/lib8390.c,1091

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "image": "asterinas/dev:0.18.1-20260901",
+  "image_id": "sha256:LOCAL_INPUT_FINGERPRINT",
+  "qemu_revision": "LOCAL_INPUT_REVISION",
+  "architecture": "x86_64",
+  "accelerator": "kvm",
+  "machine": "q35",
+  "cpu": "host,+x2apic",
+  "cpus": 1,
+  "memory": "2G",
+  "firmware": "/root/ovmf/release/OVMF.fd",
+  "qemu": "qemu-system-x86_64",
+  "sdk_reuse_sha256": "LOCAL_INPUT_FINGERPRINT",
+  "initramfs_sha256": "LOCAL_INPUT_FINGERPRINT",
+  "source_revision": "LOCAL_INPUT_REVISION",
+  "target_revision": "LOCAL_INPUT_REVISION"
+}

@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "name": "default-skill-workflow",
+  "template": "job.md",
+  "correction_template": "correction.md",
+  "stages": {
+    "driver_candidate_resolution": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/intake.md"
+      ]
+    },
+    "scope_confirmation": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/intake.md"
+      ]
+    },
+    "migration_envelope_freeze": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/intake.md"
+      ]
+    },
+    "repository_acquisition": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/acquisition.md"
+      ],
+      "objective": "Follow open-kernel-driver-port/references/acquisition.md for version selection. Choose exactly one source, target and QEMU upstream repository/ref for the frozen envelope, inspecting supplied_upstream_baselines, supplied_local_repositories and metadata only. When a role has a supplied_local_repositories path, choose a ref that is expected to exist in that local Git repository because that role will be acquired strictly offline; do not assume the controller can fall back to a remote. Do not clone, fetch, resolve tags or write provenance; the controller performs acquisition, revision resolution and identity recording. Return the selection through the controller protocol."
+    },
+    "evidence_closure": {
+      "documents": [
+        "knowledge-base-guide.md",
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/acquisition.md",
+        "open-kernel-driver-port/references/handoff.md",
+        "evidence-selection.md"
+      ],
+      "objective": "Follow open-kernel-driver-port/references/acquisition.md and handoff.md to choose the task-relevant evidence facets. Apply knowledge-base-guide.md to cover hardware, complete task-relevant source/test dependencies, target definitions plus callers and coding/safety/runtime originals, and pinned QEMU observations/limits. A cloned repository is available evidence, not automatically indexed corpus; select required originals and record explicit gaps without claiming completeness from facet names. This stage owns the material selection, rationale, source/provenance requirements and explicit gaps; the controller acquires content and records hashes and provenance. Do not use this stage for compiler/layout probes, C semantic closure, target API study, migration contracts, implementation or QEMU execution. Submit selections through the controller protocol and preserve valid selections on repair."
+    },
+    "environment_recovery": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/environment-recovery.md",
+        "environment-task.md"
+      ],
+      "objective": "Validate the configured environment under environment-task.md. Managed bootstrap owns baseline build, boot and transport; submit its report without writing or running an extra device probe. Use technical references only for a concrete environment prerequisite.",
+      "on_demand_documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/environment-recovery.md"
+      ]
+    },
+    "knowledge_base": {
+      "documents": [
+        "open-kernel-driver-port/SKILL.md",
+        "open-kernel-driver-port/references/knowledge-bootstrap.md"
+      ]
+    },
+    "target_platform_study": {
+      "documents": [
+        "analysis-task.md",
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/target-platform-study.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Resolve source obligations, a coarse target route and design-changing premises in one analysis under analysis-task.md. Use original definitions first and minimal probes only for concrete gaps. Save one Markdown report and its route reference index; the controller seeds behavior scheduling from that plan. No full platform survey or second planning task.",
+      "on_demand_documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/target-platform-study.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ]
+    },
+    "migration_contracts": {
+      "documents": [
+        "analysis-task.md",
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Controller checkpoint: bind the accepted joint analysis as contracts and test oracles. A substantive correction returns to that same joint analysis; do not author a separate contract report.",
+      "on_demand_documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ]
+    },
+    "target_framework_enablement": {
+      "documents": [
+        "delivery-task.md",
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/target-platform-study.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Complete the first coherent delivery under delivery-task.md: necessary framework changes, driver implementation, runtime insertion, required testing interfaces, artifact and harness. Separate ledger checkpoints do not require separate model tasks. Resolve only actual capability gaps and verify the current required behavior.",
+      "on_demand_documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/target-platform-study.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ]
+    },
+    "driver_implementation": {
+      "documents": [
+        "delivery-task.md",
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Complete the required driver delivery under delivery-task.md. If this is a repair or continuation, preserve working code and resolve the cited defects or missing deliverables; do not restart the initial analysis or framework task. Keep the full frozen behavior and evidence obligations.",
+      "on_demand_documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ]
+    },
+    "artifact_preparation": {
+      "documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md",
+        "knowledge-guided-driver-port/references/target-changes.md"
+      ],
+      "objective": "Prepare and identify the runtime artifact under knowledge-guided-driver-port/references/qemu-evidence.md. Use the existing implementation, contracts and test plan. This stage owns packaging/injection, the presence checker and artifact identity; keep source changes limited to necessary packaging or integration wiring and route behavioral changes back to driver_implementation. Do not perform the public QEMU evidence ladder here. Submit through the controller protocol."
+    },
+    "public_qemu_validation": {
+      "documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Controller acceptance consumes the captured artifact, the same required runtime suite used by implementation, and the existing worker notes. Run the complete public suite once on the final source snapshot and artifact; do not combine earlier per-case results. Reuse an already-passing final batch on resume regardless of temporary paths or report metadata. Do not run a second model self-check on the normal path. A worker is called only for a concrete failed gate or missing necessary fact. Preserve operator-prepared assertions: analysis prose cannot add required ktests, mocks or fault injection. Resolve the specific issue and update the existing report; do not restart a survey, expand acceptance or rerun unchanged passing tests. Independent final_evidence_review remains optional under the frozen configuration."
+    },
+    "final_evidence_review": {
+      "documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Independently perform knowledge-guided-driver-port/references/workflow.md phase 10 (Final evidence audit) over the current implementation, target changes, runtime artifact and public QEMU evidence. Treat the supplied contract and test-matrix digests as frozen acceptance oracles; do not routinely repeat accepted analysis. If concrete evidence contradicts target study, source scope, handoff or contract provenance, inspect the affected originals and request the smallest permitted prerequisite repair without silently weakening acceptance criteria. Apply the final-evidence-review rules, cite precise code and authoritative execution evidence, and return all delivery findings together. Treat human-readable artifact receipts and worker summaries as derived metadata; a receipt-only mismatch is not a packaging defect and must not trigger artifact preparation or a new QEMU run. Accept only complete agreed functionality, otherwise request the smallest evidenced repair or report a genuine external blocker."
+    },
+    "completion_audit": {
+      "documents": [
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md"
+      ]
+    },
+    "driver_split": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/curator-workflow.md"
+      ]
+    },
+    "contract_freeze": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/contracts-and-control-plane.md",
+        "blind-c2rust-driver-evaluation/references/curator-workflow.md"
+      ]
+    },
+    "reference_calibration": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/curator-workflow.md"
+      ]
+    },
+    "private_bundle_sealing": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/curator-workflow.md"
+      ]
+    },
+    "evaluation_inputs": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md",
+        "blind-c2rust-driver-evaluation/references/candidate-sealing.md"
+      ]
+    },
+    "isolation_gate": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "reproducible_build": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md",
+        "blind-c2rust-driver-evaluation/references/candidate-sealing.md"
+      ]
+    },
+    "mandatory_contracts": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/contracts-and-control-plane.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "external_functionality": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/contracts-and-control-plane.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "differential_execution": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/contracts-and-control-plane.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "fault_injection": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "mutation_adequacy": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "stress": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "performance": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "hardware_subset": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md"
+      ]
+    },
+    "evaluation_report": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/evaluator-workflow.md",
+        "blind-c2rust-driver-evaluation/references/reporting.md"
+      ]
+    },
+    "audit_inputs": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md"
+      ]
+    },
+    "independence_audit": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md"
+      ]
+    },
+    "commitment_audit": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md",
+        "blind-c2rust-driver-evaluation/references/candidate-sealing.md"
+      ]
+    },
+    "claim_audit": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/reporting.md"
+      ]
+    },
+    "audit_report": {
+      "documents": [
+        "blind-c2rust-driver-evaluation/SKILL.md",
+        "blind-c2rust-driver-evaluation/references/protocol.md",
+        "blind-c2rust-driver-evaluation/references/reporting.md"
+      ]
+    },
+    "analysis_review": {
+      "documents": [
+        "analysis-task.md",
+        "knowledge-guided-driver-port/SKILL.md",
+        "knowledge-guided-driver-port/references/workflow.md",
+        "knowledge-guided-driver-port/references/knowledge-contract.md",
+        "knowledge-guided-driver-port/references/target-platform-study.md",
+        "knowledge-guided-driver-port/references/translation.md",
+        "knowledge-guided-driver-port/references/target-changes.md",
+        "knowledge-guided-driver-port/references/test-porting.md",
+        "knowledge-guided-driver-port/references/qemu-evidence.md"
+      ],
+      "objective": "Independently review the completed target-platform study, source analysis, migration contracts and test plan before implementation and before sealing the evidence/design phase. Apply the shared review rules. Verify key evidence locations and whether originals actually support core behavior, API availability/blocker claims, the concrete driver insertion boundary, the artifact identity path and existing test coverage. Use the read-only Python locator explicitly for source references. Check the intended target architecture/artifact route separately from any standalone QEMU model smoke; a model smoke is not proof that a migrated driver can enter the target artifact. Review all assigned materials, then return all findings together with precise report/source line references and reasons. Judge readiness for implementation; planned implementation and runtime tests are not missing analysis deliverables. Request the earliest affected permitted prerequisite for substantive defects; use BLOCKED only for a genuine external prerequisite or sealed premise."
+    }
+  }
+}

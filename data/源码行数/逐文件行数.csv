@@ -1,0 +1,12 @@
+driver,role,source_file,physical_LOC
+evbug,main,drivers/input/evbug.c,100
+evbug,context,drivers/input/input.c,2864
+virtio-rng,main,drivers/char/hw_random/virtio-rng.c,281
+virtio-rng,support,drivers/char/hw_random/core.c,804
+virtio-blk,main,drivers/block/virtio_blk.c,1732
+nvme-pci,main,drivers/nvme/host/pci.c,4348
+nvme-pci,support,drivers/nvme/host/core.c,5587
+virtio-net,main,drivers/net/virtio_net.c,7321
+ne2k-pci,main,drivers/net/ethernet/8390/ne2k-pci.c,723
+ne2k-pci,support,drivers/net/ethernet/8390/8390.c,104
+ne2k-pci,support,drivers/net/ethernet/8390/lib8390.c,1091

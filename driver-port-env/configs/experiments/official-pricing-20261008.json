@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "label": "Official OpenAI Standard API list prices; not relay invoice",
+  "date": "2026-10-08",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "cache_semantics_source": "https://developers.openai.com/api/docs/guides/prompt-caching",
+  "unit": "USD per million tokens",
+  "long_context_threshold": 272000,
+  "models": {
+    "gpt-6-sol": {
+      "input": 2,
+      "cached_input": 0.2,
+      "cache_write": 2.5,
+      "output": 10
+    }
+  },
+  "long_context_models": {
+    "gpt-6-sol": {
+      "input": 4,
+      "cached_input": 0.4,
+      "cache_write": 5,
+      "output": 15
+    }
+  },
+  "evidence_sha256": {
+    "openai-pricing.html": "LOCAL_INPUT_FINGERPRINT",
+    "pricing.js": "LOCAL_INPUT_FINGERPRINT",
+    "caching.html": "LOCAL_INPUT_FINGERPRINT"
+  }
+}

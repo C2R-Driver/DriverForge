@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "agent": "OpenHands official SDK default CLI agent",
+  "sdk_version": "1.54.0",
+  "repos": {
+    "canvas": {
+      "url": "https://github.com/OpenHands/OpenHands.git",
+      "commit": "LOCAL_INPUT_REVISION"
+    },
+    "sdk": {
+      "url": "https://github.com/OpenHands/software-agent-sdk.git",
+      "commit": "LOCAL_INPUT_REVISION"
+    }
+  }
+}

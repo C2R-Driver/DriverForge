@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "catalog_id": "linux-nvme-pci-native-suite",
+  "catalog_version": 1,
+  "source_platform": "linux",
+  "drivers": [
+    {
+      "canonical_name": "nvme-pci",
+      "device_family": "nvme-pci",
+      "bus_or_transport": "PCI",
+      "aliases": [],
+      "device_scope": [
+        "PCI NVMe controller and namespace initialization, request completion and native direct-I/O filesystem regression. Embedded ktests are a separate, not-yet-enabled evaluation layer."
+      ],
+      "candidate_device_ids": [],
+      "qemu_models": [
+        "nvme"
+      ],
+      "evidence_hints": [
+        "Pinned Linux LOCAL_INPUT_REVISION",
+        "Pinned Asterinas LOCAL_INPUT_REVISION",
+        "Public oracle: unchanged upstream tests. No physical hardware, exhaustive failure or performance claim.",
+        "Metadata provenance: configs/experiments/native-drivers.json; upstream Linux source and Asterinas tools/qemu_args.sh."
+      ],
+      "candidate_id": "linux-nvme-pci",
+      "source_entry_hint": "drivers/nvme/host/pci.c"
+    }
+  ]
+}

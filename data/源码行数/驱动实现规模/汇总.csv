@@ -1,0 +1,8 @@
+驱动,实现规模LOC
+evbug,100
+virtio-rng,1085
+virtio-blk,1732
+nvme-pci,12502
+virtio-net,7321
+ne2k-pci,1918
+Total,24658
